@@ -25,6 +25,7 @@ export default async function WorkspaceLayout({ children }: { children: ReactNod
         {modules.has("crm") && <Link href="/workspace/contacts">Contacts</Link>}
         {modules.has("crm") && <Link href="/workspace/crm">CRM pipeline</Link>}
         {modules.has("gym") && <Link href="/workspace/gym">Gym</Link>}
+        {modules.has("physiotherapy") && session.role !== "member" && <Link href="/workspace/physiotherapy">Physiotherapy</Link>}
         {modules.has("hotel") && <Link href="/workspace/hotel">Hotel</Link>}
         {modules.has("car-rental") && <Link href="/workspace/car-rental">Car rental</Link>}
         {modules.has("fleet") && <Link href="/workspace/fleet">Fleet dispatch</Link>}
