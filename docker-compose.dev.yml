@@ -1,0 +1,18 @@
+services:
+  db:
+    ports:
+      - "127.0.0.1:5432:5432"
+    networks:
+      - database
+      - dev_access
+  app:
+    environment:
+      BUSINESSOS_SANDBOX_BILLING: ${BUSINESSOS_SANDBOX_BILLING:-false}
+    ports:
+      - "127.0.0.1:3000:3000"
+    networks:
+      - database
+      - edge
+
+networks:
+  dev_access:

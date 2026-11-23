@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: businessos-test
+    runtime: node
+    plan: free
+    region: singapore
+    autoDeployTrigger: 'off'
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm run migrate && npm start -- --hostname 0.0.0.0 --port "$PORT"
+    healthCheckPath: /api/health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: businessos-test-db
+          property: connectionString
+      - key: SECURE_COOKIES
+        value: 'true'
+      - key: NEXT_TELEMETRY_DISABLED
+        value: '1'
+
+databases:
+  - name: businessos-test-db
+    databaseName: businessos
+    user: businessos
+    plan: free
+    region: singapore
+    postgresMajorVersion: '17'
+    ipAllowList: []
